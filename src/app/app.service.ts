@@ -13,8 +13,8 @@ export class AppService {
         this.url = environment.serverUrl;
     }
 
-    getEmployees(params: any) {
-        return this.http.get(this.url + 'employees', { params });
+    getPrograms(params: any) {
+        return this.http.get(this.url + 'v3/launches', { params });
     }
 
 }

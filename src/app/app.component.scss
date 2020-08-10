@@ -1,26 +1,136 @@
-table,
-th,
-td {
-  border: 1px solid black;
-  border-collapse: collapse;
+h1 {
+  margin: 1%;
 }
-table {
-  width: 100%;
+.main_div {
+  display: flex;
+  .filters {
+    background: #fff;
+    width: 15%;
+    margin: 0 1%;
+    padding: 10px 10px 70px 10px;
+    border-radius: 4px;
+    height: 100%;
+    .title {
+      text-align: center;
+      text-decoration: underline;
+      margin: 5px;
+      margin-bottom: 10px;
+    }
+    .years_container {
+      display: flex;
+      flex-wrap: wrap;
+      .year_d {
+        width: 50%;
+        margin: 10px 0;
+        text-align: center;
+      }
+    }
+    .capsule {
+      padding: 6px 15px;
+    }
+    a {
+      text-align: center;
+      cursor: pointer;
+      background: #c7e09e;
+      width: 60px;
+      padding: 5px;
+      border-radius: 5px;
+      margin: auto;
+      color: #000;
+      text-decoration: none;
+    }
+    .is_active {
+      background: #7cba01;
+    }
+    .true_false {
+      display: flex;
+    }
+  }
+  .programs {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    .not_listed {
+      text-align: center;
+      width: 100%;
+      margin: auto;
+    }
+    .program {
+      width: 25%;
+      .p_card {
+        background: #fff;
+        margin: 0px 3% 6%;
+        height: 520px;
+        .img_Container {
+          text-align: center;
+          img {
+            background: #f2f2f2;
+            margin-top: 20px;
+          }
+        }
+        p {
+          font-weight: bold;
+          margin: 10px 40px;
+          span {
+            font-weight: 400;
+          }
+        }
+        ul {
+          margin: 10px 30px;
+        }
+        .id_color {
+          color: #4545dc;
+        }
+      }
+    }
+  }
 }
-
-input,
-button {
-  margin-bottom: 10px;
-}
-
-.pagination {
+h3 {
   text-align: center;
-  margin: 25px;
-  span {
-    width: 20px;
-    border: 1px solid;
-    margin: 0 10px;
-    padding: 5px;
-    cursor: pointer;
+}
+
+@media only screen and (max-width: 700px) {
+  h1 {
+    margin: 8%;
+  }
+  .main_div {
+    display: inline;
+    .filters {
+      width: 80%;
+      margin: auto;
+    }
+    .programs {
+      width: 85%;
+      margin: auto;
+      .program {
+        width: 100%;
+        .p_card {
+          margin: 5% 0 0 0;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-device-width: 700px) and (max-device-width: 1024px) {
+  h1 {
+    margin: 8%;
+  }
+  .main_div {
+    display: inline;
+    .filters {
+      width: 80%;
+      margin: auto;
+    }
+    .programs {
+      width: 85%;
+      margin: auto;
+      .program {
+        width: 50%;
+        .p_card {
+          margin: 5%;
+        }
+      }
+    }
   }
 }

@@ -1,53 +1,56 @@
-<!-- The content below is only a placeholder and can be replaced.
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div>
+  <h1>SpaceX Launch Programs</h1>
+  <div class="main_div">
+    <div class="filters">
+      <strong>Filters</strong>
+      <p class="title">Launch Year</p>
+      <div *ngIf="years && years.length > 0" class="years_container">
+        <div *ngFor="let year of years" class="year_d">
+          <a class="capsule" [routerLink]="['']" [queryParams]="{launch_year: year}" queryParamsHandling="merge"
+            routerLinkActive="is_active">{{year}}
+          </a>
+        </div>
+      </div>
+      <p class="title">Successful Launch</p>
+      <div class="true_false">
+        <a [routerLink]="['']" [queryParams]="{launch_success: true}" queryParamsHandling="merge"
+          routerLinkActive="is_active">True</a>
+        <a [routerLink]="['']" [queryParams]="{launch_success: false}" queryParamsHandling="merge"
+          routerLinkActive="is_active">False</a>
+      </div>
 
-<router-outlet></router-outlet> -->
-
-<input type="text" placeholder="search by name" [(ngModel)]="searchQuery">
-<button (click)="getEmployees()">search</button>
-
-<table>
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Age</th>
-    <th>DOJ</th>
-    <th>DOB</th>
-    <th>Profile Pic</th>
-  </tr>
-
-  <ng-container *ngIf="employeeObj && employeeObj.employees">
-    <tr *ngFor="let employee of employeeObj.employees">
-      <th>{{employee.firstName}}</th>
-      <th>{{employee.lastName}}</th>
-      <th>{{employee.age}}</th>
-      <th>{{employee.doj | date:'dd-m-yyyy'}}</th>
-      <th>{{employee.dob | date:'dd-m-yyyy'}}</th>
-      <th><img [src]="employee.profilePic" alt="profile picture" width="50"></th>
-    </tr>
-  </ng-container>
-</table>
-
-
-<div *ngIf="employeeObj && employeeObj.paginationArray" class="pagination">
-  <ng-container *ngFor="let count of employeeObj.paginationArray;">
-    <span (click)="changePage(count)">{{count}}</span>
-  </ng-container>
+      <p class="title">Successful Landing</p>
+      <div class="true_false">
+        <a [routerLink]="['']" [queryParams]="{land_success: true}" queryParamsHandling="merge"
+          routerLinkActive="is_active">True</a>
+        <a [routerLink]="['']" [queryParams]="{land_success: false}" queryParamsHandling="merge"
+          routerLinkActive="is_active">False</a>
+      </div>
+    </div>
+    <div class="programs">
+      <p class="not_listed" *ngIf="programs && programs.length == 0 && !load">No Programs Listed</p>
+      <ng-container *ngIf="programs && programs.length > 0 && !load">
+        <div *ngFor="let program of programs" class="program">
+          <div class="p_card">
+            <div class="img_Container">
+              <img [src]="program.links.mission_patch_small" alt="flight">
+            </div>
+            <p class="id_color">{{program.mission_name}}
+              #{{program.flight_number}}</p>
+            <ng-container *ngIf="program.mission_id && program.mission_id.length > 0">
+              <p>Mission Ids:</p>
+              <ul *ngFor="let mId of program.mission_id">
+                <li>{{mId}}</li>
+              </ul>
+            </ng-container>
+            <p>Launch Year: <span>{{program.launch_year}}</span>
+            </p>
+            <p>Successful Launch: <span>{{program.launch_success ? true : false}}</span></p>
+            <p>Successful Landing: <span>{{program.launch_landing ? true : false}}</span></p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <h3>Developed by : {{developerName}}</h3>
 </div>

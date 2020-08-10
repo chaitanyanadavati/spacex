@@ -1,40 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AppService } from '../app/app.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'sparity';
-  skip = 0;
-  limit = 5;
-  employeeObj: any;
-  searchQuery: string;
-  constructor(private appService: AppService) {
-    this.getEmployees();
-  }
-
-  getEmployees() {
-    const params: any = {
-      skip: this.skip,
-      limit: this.limit,
-    };
-    if (this.searchQuery) {
-      params.search_string = this.searchQuery;
-    }
-    this.appService.getEmployees(params).subscribe((resp: any) => {
-      this.employeeObj = resp;
-      this.employeeObj.paginationArray = [];
-      for (let i = 0; i < Math.ceil(this.employeeObj.total / this.employeeObj.limit); i++) {
-        this.employeeObj.paginationArray.push(i + 1);
-      }
+export class AppComponent implements OnDestroy {
+  title = 'spacex';
+  limit = 100;
+  programs = [];
+  developerName = 'Chaitanya Nadavati';
+  years = [
+    '2006', '2007', '2008',
+    '2009', '2010', '2011',
+    '2012', '2013', '2014',
+    '2015', '2016', '2017',
+    '2018', '2019', '2020'];
+  queryParams: any = {};
+  queryRef: any;
+  load = false;
+  constructor(private appService: AppService, private route: ActivatedRoute, private router: Router) {
+    this.queryRef = this.route.queryParams.subscribe((qp: any) => {
+      this.queryParams = qp;
+      this.getPrograms();
     });
   }
-
-  changePage(count: number) {
-    this.skip = (count - 1) * this.limit;
-    this.getEmployees();
+  ngOnDestroy() {
+    if (this.queryRef) { this.queryRef.unsubscribe(); }
+  }
+  getPrograms() {
+    this.load = true;
+    const queryParams = { ...this.queryParams, limit: 100 };
+    this.appService.getPrograms(queryParams).subscribe((resp: any) => {
+      this.programs = resp;
+      this.load = false;
+    });
   }
 }

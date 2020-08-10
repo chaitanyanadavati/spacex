@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'http://localhost:9632/'
+  serverUrl: 'https://api.spacexdata.com/'
 };
 
 /*
